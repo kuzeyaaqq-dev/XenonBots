@@ -1,0 +1,23 @@
+name: Site Kontrol Botu
+
+on:
+  schedule:
+    # Her gün belirli saatlerde çalışması için (Örn: Her 6 saatte bir veya günde bir)
+    # cron ifadesi UTC saatine göre çalışır.
+    - cron: '0 */12 * * *'  # Her 12 saatte bir çalışır
+  workflow_dispatch: # İstersen elle de tetikleyebilirsin
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodları Repo'dan Çek
+        uses: actions/checkout@v3
+
+      - name: Python Yükle
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Botu Çalıştır
+        run: python bot.py
